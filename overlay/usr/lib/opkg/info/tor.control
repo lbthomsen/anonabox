@@ -1,0 +1,13 @@
+Package: tor
+Version: 0.2.4.22-1
+Depends: libc, libevent2, libopenssl, libpthread, librt
+Source: feeds/oldpackages/net/tor
+Section: net
+Architecture: ar71xx
+Installed-Size: 529322
+Description:  Tor is a toolset for a wide range of organizations and people that want to
+ improve their safety and security on the Internet. Using Tor can help you
+ anonymize web browsing and publishing, instant messaging, IRC, SSH, and
+ more. Tor also provides a platform on which software developers can build
+ new applications with built-in anonymity, safety, and privacy features.
+ This package contains the tor daemon.

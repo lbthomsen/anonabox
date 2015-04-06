@@ -1,0 +1,3 @@
+/etc/init.d/tor
+/etc/tor/torrc
+/usr/sbin/tor

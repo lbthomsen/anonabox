@@ -1,0 +1,18 @@
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel '7'
+	option hwmode '11g'
+	option path 'platform/ar933x_wmac'
+	option noscan '1'
+	option disabled '0'
+	option htmode 'HT20'
+	option txpower '30'
+	option country 'US'
+
+config wifi-iface
+	option device 'radio0'
+	option mode 'ap'
+	option encryption 'none'
+	option network 'wifi'
+

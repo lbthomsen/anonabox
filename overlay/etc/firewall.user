@@ -1,0 +1,20 @@
+# everything else LAN goes over tor
+iptables -t nat -A PREROUTING -i br-lan -p tcp --syn -j REDIRECT --to-ports 9040
+# udp traffic for LAN DNS (port 53) is sent to tor 9053
+iptables -t nat -A PREROUTING -i br-lan -p udp --dport 53 -j REDIRECT --to-ports 9053
+# everything else wifi goes over tor                                                 
+iptables -t nat -A PREROUTING -i br-wifi -p tcp --syn -j REDIRECT --to-ports 9040
+# udp traffic for wifi DNS (port 53) is sent to tor 9053                             
+iptables -t nat -A PREROUTING -i br-wifi -p udp --dport 53 -j REDIRECT --to-ports 9053
+ 
+# resolve the .onion hidden services
+#iptables        -A INPUT      -p tcp --dport 9040     -j ACCEPT
+#iptables -t nat -A PREROUTING -p tcp -d 192.168.8.0/10 -j REDIRECT --to-port 9040
+#iptables -t nat -A OUTPUT     -p tcp -d 192.168.8.0/10 -j REDIRECT --to-port 9040
+
+# security rules from https://lists.torproject.org/pipermail/tor-talk/2014-March/032507.html
+#iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP
+#iptables -A OUTPUT -m state --state INVALID -j DROP
+# security rules to prevent kernel leaks from link above
+#iptables -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,FIN ACK,FIN -j DROP
+#iptables -A OUTPUT ! -o lo ! -d 127.0.0.1 ! -s 127.0.0.1 -p tcp -m tcp --tcp-flags ACK,RST ACK,RST -j DROP
